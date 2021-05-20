@@ -107,7 +107,7 @@ compute_corr <- function(data, var1, var2){
   
 }
 This function uses tidy evaluation by embracing ({{) unquoted variable names.
-Let’s add the compute_corr function to ralph.
+Let’s add the compute_corr function to firstpackage.
 
 
 usethis::use_r("compute_corr")
