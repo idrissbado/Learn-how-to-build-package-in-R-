@@ -238,10 +238,10 @@ Open a new R session. Install your package from your local directory or GitHub, 
 
 
 # install package from local directory ----
-devtools::install("C:/Users/olivier.bado/Desktop/ralph")
+devtools::install("C:/Users/olivier.bado/Desktop/firsstpackage")
 
 # or install package from GitHub ----
-# devtools::install_github("shannonpileggi/ralph")
+# devtools::install_github("olivier.bado/firstpackage")
 Due to GitHub renaming the default branch from master to main, you may need to fiddle with the ref argument in devtools::install_github.
 
 # load package ----
