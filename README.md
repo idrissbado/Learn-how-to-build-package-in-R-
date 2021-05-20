@@ -40,9 +40,9 @@ usethis::create_package("C:/Users/olivier.bado/Desktop/firstpackage")
 
 Now you have a package! The usethis::create_package function:
 
-Creates a new R project named ralph at your specified location.
+Creates a new R project named firstpackage at your specified location.
 
-Opens the ralph project in a new RStudio session.
+Opens the firstpackage project in a new RStudio session.
 
 Creates the minimal essential files and structure required for R packages.
 
