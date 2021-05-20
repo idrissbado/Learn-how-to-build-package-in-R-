@@ -245,7 +245,7 @@ devtools::install("C:/Users/olivier.bado/Desktop/firsstpackage")
 Due to GitHub renaming the default branch from master to main, you may need to fiddle with the ref argument in devtools::install_github.
 
 # load package ----
-library(ralph)
+library(firstpackage)
 
 # execute function ----
 compute_corr(data = faithful, var1 = eruptions, var2 = waiting)
