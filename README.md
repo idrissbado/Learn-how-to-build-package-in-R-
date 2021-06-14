@@ -1,5 +1,11 @@
 # Learn-how-to-build-package-in-R-
-This workshop is for people looking to learn how to make their own R packages and learn how to use usethis and devtools for package development. The workshop will cover handy one time functions (i.e., usethis::create_package) as well as functions used continuously throughout package development (i.e., devtools::document). At the end of the hour you should have a working, well-documented package with a single function, as well as a better understanding of the files and file structure required for R packages.  This workshop is suitable for beginner to intermediate R users. Attendees should be familiar with functions, but will not be writing their own function in this workshop. Familiarity with pipe or tidyverse is helpful.
+This workshop is for people looking to learn how to make their own R packages and learn how to use usethis and devtools for package development. 
+The workshop will cover handy one time functions (i.e., usethis::create_package) as well as functions used continuously
+throughout package development (i.e., devtools::document).
+At the end of the hour you should have a working, well-documented package with a single function, as well as a better understanding of the files and file structure required for R packages. 
+This workshop is suitable for beginner to intermediate R users.
+Attendees should be familiar with functions, but will not be writing their own function in this workshop.
+Familiarity with pipe or tidyverse is helpful.
 This material was developed using:
 
 Software / package	Version
@@ -12,18 +18,27 @@ rlang	0.4.8
 broom	0.7.1
 Please install and update all software / packages prior to following along, as otherwise errors may arise.
 
-Toolkit
-Single usage functions only need to be used one time in the development process; multiple usage functions are executed as needed. This table only contains functions used in this workshop; there are many other handy functions in devtools and usethis for package development.
+##Toolkit
+Single usage functions only need to be used one time in the development process; multiple usage functions are executed as needed. 
+This table only contains functions used in this workshop; there are many other handy functions in devtools and usethis for package development.
 
-Usage	Function	Purpose
+##Usage	Function	Purpose
 Single	usethis::create_package("path/package")	initialize package
+
 usethis::use_mit_license("Your name")	add license
+
 usethis::use_pipe()	add pipe function as a dependency
+
 Multiple	devtools::check()	build package locally and check
-devtools::load_all()	load functions in 📂 R/ into memory
+
+devtools::load_all()	load functions in R/ into memory
+
 usethis::use_r("function")	create R script for function
+
 usethis::use_package("package")	add package dependency
+
 devtools::document()	build and add documentation
+
 Other resources:
 
 Package development cheat sheet
@@ -34,6 +49,8 @@ How to develop good R packages by Maëlle Salmon
 
 R Package Primer by Karl Broman
 Open an R session and submit the following, modified to your desired location. Here, I am creating a package named firstpackage on my desktop. 
+
+## let's begin 
 
 usethis::create_package("C:/Users/olivier.bado/Desktop/firstpackage")
 
@@ -53,16 +70,22 @@ If you are already authenticated, the usethis package has some handy functions t
 
 
 usethis::use_git()     # step 1 ----
+
 usethis::use_github()  # step 2 ----
-GitHub is renaming the default branch from master to main. Currently, usethis::use_github() creates a repo with the default branch named master.
+
+GitHub is renaming the default branch from master to main.
+Currently, usethis::use_github() creates a repo with the default branch named master.
 For more references on using git / GitHub, see Jenny Bryan’s Happy Git and GitHub for the useR or Ch 18 in R Packages by Hadley Wickham and Jenny Bryan.
 
 First check
-Now that we have a package, let’s check it. Submitting devtools::check() updates package documentation, builds the package, and submits over 50 checks for metadata, structure, R code, documentation, and more!
+Now that we have a package, let’s check it.
+Submitting devtools::check() updates package documentation, builds the package, and submits over 50 checks for metadata, structure, R code, documentation, and more!
 
 
 devtools::check()
-This can take a while to run, depending on how big your package is. It is helpful to run frequently, especially if you are planning on submitting to CRAN. But even for internal packages, it is still good practice.
+This can take a while to run, depending on how big your package is. 
+It is helpful to run frequently, especially if you are planning on submitting to CRAN. 
+But even for internal packages, it is still good practice.
 
 Our first check results in a single warning - that our package needs a license in the DESCRIPTION file:
 
@@ -72,6 +95,7 @@ To fix this, add the license of your choice. A standard recommendation is the MI
 
 
 usethis::use_mit_license("Olivier.bado")
+
 This updates the description file, as well as creates two new license files in your project that you never have to touch.
 
 
@@ -81,11 +105,12 @@ You can go back and complete the remaining description fields later. Re-submit
 
 
 devtools::check()
+
 and our package is error, warning, and note free.
 
 
 
-First function
+##First function
 Create
 The compute_corr function is a wrapper for cor.test that produces tidy output for Pearson’s correlation estimate (along with a p-value) to quantify the linear relationship between two quantitative variables.
 
@@ -106,16 +131,19 @@ compute_corr <- function(data, var1, var2){
     )
   
 }
+
 This function uses tidy evaluation by embracing ({{) unquoted variable names.
 Let’s add the compute_corr function to firstpackage.
 
 
 usethis::use_r("compute_corr")
-This creates a blank R script named compute_corr.R located in the R/ folder. It is convention that your function name and R script name are the same. Copy and paste the function to the blank R script, and then save.
+This creates a blank R script named compute_corr.R located in the R/ folder. 
+It is convention that your function name and R script name are the same.
+Copy and paste the function to the blank R script, and then save.
 
 
 
-Execute
+##Execute
 Take your function for a test drive with devtools::load_all (“arguably the most important part of the devtools workflow”).
 
 
@@ -131,7 +159,8 @@ compute_corr(data = faithful, var1 = eruptions, var2 = waiting)
 1       0.901 8.13e-100
 Depending on which packages are loaded in your R session, you may have a small hiccup here, which we discuss in the workshop.
 Document
-Next document the compute_corr function using the Roxygen skeleton. First, place your cursor in the function definition, and then you can add the skeleton two ways:
+Next document the compute_corr function using the Roxygen skeleton. 
+  First, place your cursor in the function definition, and then you can add the skeleton two ways:
 
 Code -> Insert Roxygen Skeleton, or
 
@@ -141,7 +170,8 @@ You should see this:
 
 
 
-where we now have an outline to fill in. Note that the three arguments in our function (data, var1, var2) were automatically detected. Update the documentation as follows:
+where we now have an outline to fill in. 
+Note that the three arguments in our function (data, var1, var2) were automatically detected. Update the documentation as follows:
 
 
 #' Computes a tidy correlation
